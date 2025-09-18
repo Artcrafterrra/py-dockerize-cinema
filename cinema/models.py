@@ -141,10 +141,9 @@ class Ticket(models.Model):
         force_insert=False,
         force_update=False,
         using=None,
-        update_fields=None,
     ):
         self.full_clean()
-        return super().save(*args, **kwargs)
+        return super().save(*args)
 
     def __str__(self):
         return (
