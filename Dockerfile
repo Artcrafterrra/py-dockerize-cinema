@@ -7,7 +7,16 @@ WORKDIR /cinema
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apk add --no-cache --virtual .build-deps \
+      build-base \
+      postgresql-dev \
+      linux-headers \
+      jpeg-dev \
+      zlib-dev \
+    && apk add --no-cache \
+      postgresql-libs \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apk del .build-deps
 
 COPY . .
 
